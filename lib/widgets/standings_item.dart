@@ -1,12 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/driver.dart';
+import 'package:fonetracker/utils/nation_util.dart';
 
-class StandingsItem extends StatelessWidget{
+class StandingsItem extends StatefulWidget{
 
   final Driver driver;
   final int points;
 
   const StandingsItem({Key key, this.driver, this.points}) : super(key: key);
+
+  @override
+  _StandingsItemState createState() => _StandingsItemState();
+}
+
+class _StandingsItemState extends State<StandingsItem> {
+
+  CountryCode _countryCode;
+
+  @override
+  void initState() {
+    super.initState();
+    _countryCode = new CountryCode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +32,16 @@ class StandingsItem extends StatelessWidget{
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
-            Text(driver.giveName + " " + driver.familyName),
+            Image(
+              image: NetworkImage("https://www.countryflags.io/"+ _countryCode.getCountryCode(widget.driver.nationality) +  "/flat/64.png"),
+            ),
+            const SizedBox(width: 10.0),
+            Text(widget.driver.giveName + " " + widget.driver.familyName),
             Spacer(),
-            Text(points.toString())
+            Text(widget.points.toString())
           ],
         ),
       ),
     );
   }
-
 }
