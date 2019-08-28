@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 
@@ -7,6 +8,7 @@ class Driver{
   final String giveName;
   final String familyName;
   final String nationality;
+  Uint8List imageBytes;
 
   Driver({this.id, this.number, this.giveName, this.familyName, this.nationality});
 

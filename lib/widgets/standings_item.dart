@@ -33,7 +33,7 @@ class _StandingsItemState extends State<StandingsItem> {
         child: Row(
           children: <Widget>[
             Image(
-              image: NetworkImage("https://www.countryflags.io/"+ _countryCode.getCountryCode(widget.driver.nationality) +  "/flat/64.png"),
+              image: MemoryImage(widget.driver.imageBytes),
             ),
             const SizedBox(width: 10.0),
             Text(widget.driver.giveName + " " + widget.driver.familyName),

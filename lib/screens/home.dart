@@ -6,10 +6,6 @@ import 'package:fonetracker/services/standings_service.dart';
 import 'package:fonetracker/widgets/standings_item.dart';
 
 class HomePage extends StatefulWidget {
-  final Future<Standings> standings;
-
-  const HomePage({Key key, this.standings}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: CupertinoThemeData(
         primaryColor: Colors.blue,
       ),
-      home: HomePage(standings: StandingsService().getStandings(),),
+      home: HomePage(),
     );
   }
 }
