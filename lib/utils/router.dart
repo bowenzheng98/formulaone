@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fonetracker/screens/driver_standings.dart';
+import 'package:fonetracker/models/race.dart';
+import 'package:fonetracker/screens/race_page.dart';
+import 'package:fonetracker/screens/schedule_page.dart';
+import 'package:fonetracker/screens/standings_page.dart';
 
 typedef RouteAction<R, T> = R Function(PageRoute<T> route);
 
@@ -12,7 +15,11 @@ class _Routes<R> {
     return _action(CupertinoPageRoute(builder: builder));
   }
 
-  R driverStandings() => _execute((BuildContext context) => DriverStandings());
+  R driverStandings() => _execute((BuildContext context) => DriverStandingsPage());
+
+  R schedule() => _execute((BuildContext context) => SchedulePage());
+
+  R raceDetails(Race race) => _execute((BuildContext context) => RacePage(race: race));
 }
 
 /// Idiomatic API for pushing routes

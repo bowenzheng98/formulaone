@@ -2,13 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/driver.dart';
-import 'package:fonetracker/models/standings.dart';
 import 'package:fonetracker/services/driver_service.dart';
-import 'package:fonetracker/services/standings_service.dart';
-import 'package:fonetracker/utils/injector.dart';
+import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/utils/router.dart';
 import 'package:fonetracker/widgets/homepage_item.dart';
-import 'package:fonetracker/widgets/standings_item.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -48,7 +45,8 @@ class _HomePageState extends State<HomePage> {
                return new Container(
                  child: Column(
                    children: <Widget>[
-                     HomePageItem(pageName: "Driver Standings", route: () => Router.of(context).push().driverStandings(),)
+                     HomePageItem(pageName: "Driver Standings", route: () => Router.of(context).push().driverStandings()),
+                     HomePageItem(pageName: "Schedule", route: () => Router.of(context).push().schedule())
                    ],
                  ),
                );
@@ -61,11 +59,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchDrivers() async{
-    print(1);
     var injector = Injector.of(context);
     DriverService service = injector.get();
     Map<String,Driver> map = await service.getDrivers();
-    print(map);
     injector.register(value: map,qualifier: #drivers);
   }
 }

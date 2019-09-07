@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:convert' as convert;
 
 import 'package:fonetracker/models/standing.dart';
 import 'package:fonetracker/models/standings.dart';
@@ -11,12 +11,11 @@ class StandingsService{
 
   Future<Standings> getStandings() async {
     final response = await http.get("http://ergast.com/api/f1/current/driverStandings.json");
-
     if (response.statusCode == 200){
-      var body = json.decode(response.body);
-      int season = int.parse(body["MRData"]["StandingsTable"]["StandingsLists"][0]["season"]);
-      int round = int.parse(body["MRData"]["StandingsTable"]["StandingsLists"][0]["round"]);
-      List<Standing> standingList = (body["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"] as List)
+      var json = convert.json.decode(response.body);
+      int season = int.parse(json["MRData"]["StandingsTable"]["StandingsLists"][0]["season"]);
+      int round = int.parse(json["MRData"]["StandingsTable"]["StandingsLists"][0]["round"]);
+      List<Standing> standingList = (json["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"] as List)
         .map((data) => Standing.fromJson(data)).toList();
       return Standings(season: season, round: round, standings: standingList);
     }

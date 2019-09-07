@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:fonetracker/utils/inject.dart';
+import 'package:fonetracker/inject/inject.dart';
 
 typedef void Bootstrap(Inject inject);
 

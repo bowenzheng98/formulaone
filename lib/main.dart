@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fonetracker/screens/home.dart';
-import 'package:fonetracker/utils/app_injector.dart';
+import 'package:fonetracker/screens/home_page.dart';
+import 'package:fonetracker/inject/app_injector.dart';
+import 'package:fonetracker/styles.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       child: CupertinoApp(
         title: "formula one tracker",
         theme: CupertinoThemeData(
-          primaryColor: Colors.blue,
+          primaryColor: Styles.grey,
         ),
         home: HomePage(),
       ),
