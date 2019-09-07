@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui';
-import 'package:http/http.dart' as http;
 
 class Driver{
   final String id;

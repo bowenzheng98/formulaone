@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fonetracker/screens/home.dart';
 import 'package:fonetracker/services/standings_service.dart';
+import 'package:fonetracker/utils/app_injector.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: CupertinoThemeData(
         primaryColor: Colors.blue,
       ),
-      home: HomePage(),
+      home: AppInjector(child: HomePage()),
     );
   }
 }
