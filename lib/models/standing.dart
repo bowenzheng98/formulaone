@@ -2,7 +2,7 @@ import 'driver.dart';
 
 class Standing{
 
-  final Driver driver;
+  final String driver;
   final int position;
   final int points;
   final int wins;
@@ -11,7 +11,7 @@ class Standing{
 
   factory Standing.fromJson(Map<String, dynamic> json){
     return new Standing(
-      driver: new Driver.fromJson(json["Driver"]),
+      driver: json["Driver"]["driverId"],
       position: int.parse(json["position"]),
       points: int.parse(json["points"]),
       wins: int.parse(json["wins"]),

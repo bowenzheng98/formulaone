@@ -1,4 +1,5 @@
-import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
+import 'package:fonetracker/utils/nation_util.dart';
 
 class Driver{
   final String id;
@@ -6,9 +7,8 @@ class Driver{
   final String giveName;
   final String familyName;
   final String nationality;
-  Uint8List imageBytes;
 
-  Driver({this.id, this.number, this.giveName, this.familyName, this.nationality});
+  Driver({this.id, this.number, this.giveName, this.familyName, this.nationality,});
 
   factory Driver.fromJson(Map<String, dynamic> json){
     return new Driver(

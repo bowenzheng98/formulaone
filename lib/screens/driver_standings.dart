@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fonetracker/models/driver.dart';
 import 'package:fonetracker/models/standings.dart';
 import 'package:fonetracker/services/standings_service.dart';
+import 'package:fonetracker/utils/inject.dart';
+import 'package:fonetracker/utils/injector.dart';
 import 'package:fonetracker/widgets/standings_item.dart';
 
 class DriverStandings extends StatefulWidget{
@@ -10,6 +13,9 @@ class DriverStandings extends StatefulWidget{
 }
 
 class _DriverStandingsState extends State<DriverStandings> {
+
+  Map<String, Driver> drivers;
+  Inject injector;
   bool isLoading;
   Standings standings;
 
@@ -21,6 +27,9 @@ class _DriverStandingsState extends State<DriverStandings> {
 
   @override
   Widget build(BuildContext context) {
+    injector = Injector.of(context);
+    drivers = injector.get(qualifier: #drivers);
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text("Standings"),
@@ -36,7 +45,7 @@ class _DriverStandingsState extends State<DriverStandings> {
                     children: <Widget>[
                       for (var standing in standings.standings)
                         StandingsItem(
-                          driver: standing.driver,
+                          driver: drivers[standing.driver],
                           points: standing.points,
                         )
                     ],
@@ -46,12 +55,11 @@ class _DriverStandingsState extends State<DriverStandings> {
     );
   }
 
-  _fetchData() async {
+  Future<void> _fetchData() async {
     setState(() {
       isLoading = true;
     });
     var data = await StandingsService().getStandings();
-    print(data);
     setState(() {
       standings = data;
       isLoading = false;

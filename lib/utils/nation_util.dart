@@ -1,5 +1,5 @@
 class CountryCode {
-  Map<String, String> nationalityMap = {
+  static Map<String, String> nationalityMap = {
     "Andorian": "AD",
     "Emirian": "AE",
     "Afghani": "AF",
@@ -127,7 +127,7 @@ class CountryCode {
     "Monegasque": "FR",
   };
 
-  getCountryCode(String nationality) {
+  static String getCountryCode(String nationality) {
     return nationalityMap[nationality];
   }
 }
