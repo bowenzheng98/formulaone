@@ -43,7 +43,7 @@ class _SchedulePageState extends State<SchedulePage>{
                 return CupertinoScrollbar(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: new ListView(
+                    child: ListView(
                       children: <Widget>[
                         for (Race race in snapshot.data)
                           ScheduleItem(race: race,)

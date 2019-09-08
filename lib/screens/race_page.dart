@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fonetracker/inject/inject.dart';
+import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/models/result.dart';
+import 'package:fonetracker/services/race_results_service.dart';
+import 'package:fonetracker/widgets/race_result_item.dart';
 
 class RacePage extends StatefulWidget {
   final Race race;
@@ -13,34 +17,25 @@ class RacePage extends StatefulWidget {
 }
 
 class _RacePageState extends State<RacePage> {
-
-  int _currentSegment;
-  Map<int, Widget> _page;
-  bool _loading;
-
+  int currentSegment;
+  Map<int, Widget> page;
+  Inject injector;
+  Future<List<RaceResult>> results;
 
   @override
   void initState() {
     super.initState();
-    _currentSegment = 0;
-    _loading = true;
-    (() async {
-      setState(() {
-        _loading = true;
-      });
-      _page = <int, Widget>{
-        0: _buildDetails(widget.race),
-        1: await _buildResults(),
-      };
-      setState(() {
-        _loading = false;
-      });
-    });
+    injector = Injector.of(context);
+    currentSegment = 0;
+    results = fetchRaceResults();
+    page = <int, Widget>{
+      0: _buildDetails(widget.race),
+      1: _buildResults(),
+    };
   }
 
   @override
   Widget build(BuildContext context) {
-
     final Map<int, Widget> segmentWidgets = const <int, Widget>{
       0: Text("Details"),
       1: Text("Results")
@@ -61,43 +56,79 @@ class _RacePageState extends State<RacePage> {
               width: 500.0,
               child: CupertinoSegmentedControl<int>(
                 children: segmentWidgets,
-                groupValue: _currentSegment,
-                onValueChanged: (int val){
+                groupValue: currentSegment,
+                onValueChanged: (int val) {
                   setState(() {
-                    _currentSegment = val;
+                    currentSegment = val;
                   });
                 },
               ),
             ),
-            SizedBox(height: 8.0,),
-            _loading ? Center(child: CupertinoActivityIndicator()) : Expanded(child: _page[_currentSegment],)
+            SizedBox(
+              height: 8.0,
+            ),
+            Expanded(child: page[currentSegment]),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildDetails(Race race){
+  Widget _buildDetails(Race race) {
     return new Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(race.raceName),
-        SizedBox(height: 8.0,),
+        SizedBox(
+          height: 8.0,
+        ),
         Text(race.round.toString()),
-        SizedBox(height: 8.0,),
+        SizedBox(
+          height: 8.0,
+        ),
         Text(race.season.toString()),
-        SizedBox(height: 8.0,),
+        SizedBox(
+          height: 8.0,
+        ),
         Text(race.ciruit.circuitName),
-        SizedBox(height: 8.0,),
+        SizedBox(
+          height: 8.0,
+        ),
       ],
     );
   }
 
-  Future<Widget> _buildResults() async{
-    return Text("test");
+  Widget _buildResults() {
+    return new FutureBuilder<List<RaceResult>>(
+      future: results,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: new CupertinoScrollbar(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: ListView(
+                  children: <Widget>[
+                    for (RaceResult result in snapshot.data)
+                      RaceResultItem(result: result),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        if (snapshot.data == null) {
+          return new SizedBox.shrink();
+        }
+        return new Center(
+          child: CupertinoActivityIndicator(),
+        );
+      },
+    );
   }
 
-  Future<List<RaceResult>> fetchRaceResults() async{
-
+  Future<List<RaceResult>> fetchRaceResults() async {
+    return await RaceResultsService().getRaceResults(widget.race.round);
   }
-
 }

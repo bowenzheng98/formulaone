@@ -4,11 +4,14 @@ import 'dart:convert' as convert;
 
 class RaceResultsService{
 
-  Future<List<RaceResult>> getRaceResults(String round) async{
-    var url =  "http://ergast.com/api/f1/current/" + round + "/results.json";
+  Future<List<RaceResult>> getRaceResults(int round) async{
+    var url =  "http://ergast.com/api/f1/current/" + round.toString() + "/results.json";
     var response = await http.get(url);
     var json = convert.json.decode(response.body);
-    List<RaceResult> results = ( json["MRData"]["RaceTable"]["Races"]["Results"] as List)
+    if ((json["MRData"]["RaceTable"]["Races"] as List).isEmpty ){
+      return null;
+    }
+    List<RaceResult> results = ( json["MRData"]["RaceTable"]["Races"][0]["Results"] as List)
         .map((data) => RaceResult.fromJson(data)).toList();
     return results;
   }
