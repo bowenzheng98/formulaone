@@ -18,18 +18,22 @@ class _HomePageState extends State<HomePageItem>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0,
+      height: 80.0,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
-          child: Row(
+          child: Column(
             children: <Widget>[
-              Text(widget.pageName),
-              Spacer(),
-              Container(
-                child: Icon(CupertinoIcons.forward),
-              )
+              Row(
+                children: <Widget>[
+                  Text(widget.pageName),
+                  Spacer(),
+                  Container(
+                    child: Icon(CupertinoIcons.forward),
+                  )
+                ],
+              ),
             ],
           ),
           onTap: widget.route,

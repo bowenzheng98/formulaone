@@ -45,8 +45,9 @@ class _HomePageState extends State<HomePage> {
                return new Container(
                  child: Column(
                    children: <Widget>[
+                     SizedBox(height: 16.0,),
                      HomePageItem(pageName: "Driver Standings", route: () => Router.of(context).push().driverStandings()),
-                     HomePageItem(pageName: "Schedule", route: () => Router.of(context).push().schedule())
+                     HomePageItem(pageName: "Races", route: () => Router.of(context).push().schedule())
                    ],
                  ),
                );

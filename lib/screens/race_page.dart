@@ -76,7 +76,7 @@ class _RacePageState extends State<RacePage> {
 
   Widget _buildDetails(Race race) {
     return new Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(race.raceName),
         SizedBox(
@@ -118,7 +118,7 @@ class _RacePageState extends State<RacePage> {
             ),
           );
         }
-        if (snapshot.data == null) {
+        if (snapshot.connectionState == ConnectionState.done && snapshot.data == null) {
           return new SizedBox.shrink();
         }
         return new Center(
