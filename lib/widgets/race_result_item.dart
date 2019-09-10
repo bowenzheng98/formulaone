@@ -36,10 +36,10 @@ class _RaceResultItemState extends State<RaceResultItem>{
       child: Row(
         children: <Widget>[
           Text(widget.result.position.toString()),
-          Spacer(),
+          SizedBox(width: 20.0,),
+          SizedBox(width: 30.0, child: Text(widget.result.driverNumber.toString()),),
+          SizedBox(width: 10.0,),
           Text(driver.familyName),
-          Spacer(),
-          Text(widget.result.driverNumber.toString()),
           Spacer(),
           Text(widget.result.points.toString()),
         ],
