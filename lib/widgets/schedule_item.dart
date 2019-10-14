@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/utils/router.dart';
@@ -22,6 +23,7 @@ class _ScheduleItemState extends State<ScheduleItem>{
       padding: const EdgeInsets.all(2.0),
       child: new Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           border: Border.all(width: 2.0, color: CupertinoTheme.of(context).primaryColor)
         ),

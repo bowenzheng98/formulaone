@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/services/schedule_service.dart';
+import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/widgets/schedule_item.dart';
 
 class SchedulePage extends StatefulWidget{
@@ -26,6 +28,7 @@ class _SchedulePageState extends State<SchedulePage>{
   Widget build(BuildContext context) {
     return new CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        backgroundColor: Colors.white,
         leading: Container(
           child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
@@ -34,26 +37,29 @@ class _SchedulePageState extends State<SchedulePage>{
         ),
         middle: Text("Schedule"),
       ),
-      child: SafeArea(
-        child: Center(
-          child: FutureBuilder<List<Race>>(
-            future: schedule,
-            builder: (context, snapshot){
-              if(snapshot.hasData){
-                return CupertinoScrollbar(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView(
-                      children: <Widget>[
-                        for (Race race in snapshot.data)
-                          ScheduleItem(race: race,)
-                      ],
+      child: Container(
+        color: Styles.background_grey,
+        child: SafeArea(
+          child: Center(
+            child: FutureBuilder<List<Race>>(
+              future: schedule,
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return CupertinoScrollbar(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView(
+                        children: <Widget>[
+                          for (Race race in snapshot.data)
+                            ScheduleItem(race: race,)
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              return CupertinoActivityIndicator();
-            },
+                  );
+                }
+                return CupertinoActivityIndicator();
+              },
+            ),
           ),
         ),
       ),
