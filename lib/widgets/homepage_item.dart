@@ -9,13 +9,12 @@ class HomePageItem extends StatelessWidget {
   final VoidCallback route;
   final String assetPath;
 
-  const HomePageItem(
-      {Key key,
-      this.pageName,
-      this.route,
-      this.assetPath,
-      })
-      : super(key: key);
+  const HomePageItem({
+    Key key,
+    this.pageName,
+    this.route,
+    this.assetPath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,35 +24,38 @@ class HomePageItem extends StatelessWidget {
         onTap: route,
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.blue,
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Color.fromRGBO(229, 229, 234, 0.9),
+                  color: Color.fromRGBO(142, 142, 147, 0.7),
                   blurRadius: 8.0,
                 )
               ]),
           height: 300.0,
           width: 400.0,
-          child: Stack(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 98.0),
-                child: Center(
-                  child: Image(
-                    image: AssetImage(assetPath),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 98.0),
+                  child: Center(
+                    child: Image(
+                      image: AssetImage(assetPath),
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: ItemDetails(
-                  pageName: pageName,
-                ),
-              )
-            ],
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: ItemDetails(
+                    pageName: pageName,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -73,6 +75,8 @@ class ItemDetails extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
+          decoration: BoxDecoration(
+          ),
           height: 50.0,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +85,7 @@ class ItemDetails extends StatelessWidget {
                 pageName,
                 style: TextStyle(
                   fontSize: 22.0,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ],

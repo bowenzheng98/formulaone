@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         theme: CupertinoThemeData(
           primaryColor: Styles.grey,
           textTheme: CupertinoTextThemeData(
-            textStyle: TextStyle(fontFamily: 'SFDisplayPro')
+            textStyle: TextStyle(fontFamily: 'SFDisplayPro', color: Colors.black)
           )
         ),
         home: HomePage(),
