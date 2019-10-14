@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fonetracker/styles.dart';
 
 class HomePageItem extends StatelessWidget {
   final String pageName;
@@ -29,7 +30,7 @@ class HomePageItem extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Color.fromRGBO(142, 142, 147, 0.7),
+                  color: Styles.shadow_grey,
                   blurRadius: 8.0,
                 )
               ]),

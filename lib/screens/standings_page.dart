@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
@@ -6,6 +7,7 @@ import 'package:fonetracker/models/driver.dart';
 import 'package:fonetracker/models/standing.dart';
 import 'package:fonetracker/models/standings.dart';
 import 'package:fonetracker/services/standings_service.dart';
+import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/widgets/standings_item.dart';
 
 class DriverStandingsPage extends StatefulWidget{
@@ -33,6 +35,7 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        backgroundColor: Colors.white,
         leading: Container(
           child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
@@ -51,26 +54,29 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
           },
         ),
       ),
-      child: SafeArea(
-        child: Center(
-          child: FutureBuilder<Standings>(
-            future: standings,
-            builder: (context, snapshot){
-              if(snapshot.hasData){
-                return new CupertinoScrollbar(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView(
-                      children: <Widget>[
-                        for (Standing standing in snapshot.data.standings)
-                          StandingsItem(driver: drivers[standing.driver], points: standing.points,)
-                      ],
+      child: Container(
+        color: Styles.background_grey,
+        child: SafeArea(
+          child: Center(
+            child: FutureBuilder<Standings>(
+              future: standings,
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return new CupertinoScrollbar(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView(
+                        children: <Widget>[
+                          for (Standing standing in snapshot.data.standings)
+                            StandingsItem(driver: drivers[standing.driver], points: standing.points,)
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              return CupertinoActivityIndicator();
-            },
+                  );
+                }
+                return CupertinoActivityIndicator();
+              },
+            ),
           ),
         ),
       ),

@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   Future<void> drivers;
 
   @override
@@ -27,64 +26,47 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 12.0, 16.0, 0.0),
-                  child: Text("Formula Home", style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 48.0),),
-                )
-              ],
-            ),
-            FutureBuilder<void>(
-                future: drivers,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.waiting:
-                    case ConnectionState.active:
-                      return new Container(
-                        child: Center(
-                          child: CupertinoActivityIndicator(),
+        child: FutureBuilder<void>(
+            future: drivers,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                case ConnectionState.active:
+                  return new Container(
+                    child: Center(
+                      child: CupertinoActivityIndicator(),
+                    ),
+                  );
+                case ConnectionState.done:
+                  return new Container(
+                    child: CustomScrollView(slivers: <Widget>[
+                      CupertinoSliverNavigationBar(
+                        largeTitle: Text("Formula Home"),
+                        backgroundColor: Colors.white,
+                        border: Border(bottom: BorderSide(style: BorderStyle.none)),
+                      ),
+                      SliverList(
+                          delegate: SliverChildListDelegate([
+                        HomePageItem(
+                          pageName: "Driver Standings",
+                          route: () =>
+                              Router.of(context).push().driverStandings(),
+                          assetPath: "assets/icons/helmet.png",
+                          color: Styles.accent_red,
                         ),
-                      );
-                    case ConnectionState.done:
-                      return new Container(
-                        child: Expanded(
-                          child: CupertinoScrollbar(
-                            child: ListView(
-                              physics: ClampingScrollPhysics(),
-                              children: <Widget>[
-                                SizedBox(height: 16.0,),
-                                HomePageItem(
-                                  pageName: "Driver Standings",
-                                  route: () =>
-                                      Router.of(context)
-                                          .push()
-                                          .driverStandings(),
-                                  assetPath: "assets/icons/helmet.png",
-                                  color: Styles.accent_red,
-                                ),
-                                HomePageItem(
-                                  pageName: "Races",
-                                  route: () => Router.of(context).push().schedule(),
-                                  assetPath: "assets/icons/award.png",
-                                  color: Styles.accent_yellow,
-                                ),
-                              ],
-                            ),
-                          ),
+                        HomePageItem(
+                          pageName: "Races",
+                          route: () => Router.of(context).push().schedule(),
+                          assetPath: "assets/icons/award.png",
+                          color: Styles.accent_yellow,
                         ),
-                      );
-                }
-                  return
-                  null;
-                }
-            ),
-          ],
-        ),
+                      ])),
+                    ]),
+                  );
+              }
+              return null;
+            }),
       ),
     );
   }
