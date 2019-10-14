@@ -46,8 +46,16 @@ class _HomePageState extends State<HomePage> {
                  child: Column(
                    children: <Widget>[
                      SizedBox(height: 16.0,),
-                     HomePageItem(pageName: "Driver Standings", route: () => Router.of(context).push().driverStandings()),
-                     HomePageItem(pageName: "Races", route: () => Router.of(context).push().schedule())
+                     HomePageItem(
+                       pageName: "Driver Standings",
+                       route: () => Router.of(context).push().driverStandings(),
+                       assetPath: "assets/icons/helmet.png",
+                     ),
+                     HomePageItem(
+                       pageName: "Races",
+                       route: () => Router.of(context).push().schedule(),
+                       assetPath: "assets/icons/award.png",
+                     ),
                    ],
                  ),
                );
