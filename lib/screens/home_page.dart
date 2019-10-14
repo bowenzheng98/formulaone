@@ -24,62 +24,72 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-   return CupertinoPageScaffold(
-     child: SafeArea(
-       child: Column(
-         children: <Widget>[
-           Row(
-             children: <Widget>[
-               Padding(
-                 padding: const EdgeInsets.fromLTRB(20.0, 12.0, 16.0, 0.0),
-                 child: Text("Formula One", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 48.0),),
-               )
-             ],
-           ),
-           FutureBuilder<void>(
-             future: drivers,
-             builder: (context, snapshot){
-               switch(snapshot.connectionState){
-                 case ConnectionState.none:
-                 case ConnectionState.waiting:
-                 case ConnectionState.active:
-                   return new Container(
-                     child: Center(
-                       child: CupertinoActivityIndicator(),
-                     ),
-                   );
-                 case ConnectionState.done:
-                   return new Container(
-                     child: Column(
-                       children: <Widget>[
-                         SizedBox(height: 16.0,),
-                         HomePageItem(
-                           pageName: "Driver Standings",
-                           route: () => Router.of(context).push().driverStandings(),
-                           assetPath: "assets/icons/helmet.png",
-                         ),
-                         HomePageItem(
-                           pageName: "Races",
-                           route: () => Router.of(context).push().schedule(),
-                           assetPath: "assets/icons/award.png",
-                         ),
-                       ],
-                     ),
-                   );
-               }
-               return null;
-             }
-           ),
-         ],
-       ),
-     ),
-   );
+    return CupertinoPageScaffold(
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(18.0, 12.0, 16.0, 0.0),
+                  child: Text("Formula Home", style: TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 48.0),),
+                )
+              ],
+            ),
+            FutureBuilder<void>(
+                future: drivers,
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                    case ConnectionState.active:
+                      return new Container(
+                        child: Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      );
+                    case ConnectionState.done:
+                      return new Container(
+                        child: Expanded(
+                          child: CupertinoScrollbar(
+                            child: ListView(
+                              physics: ClampingScrollPhysics(),
+                              children: <Widget>[
+                                SizedBox(height: 16.0,),
+                                HomePageItem(
+                                  pageName: "Driver Standings",
+                                  route: () =>
+                                      Router.of(context)
+                                          .push()
+                                          .driverStandings(),
+                                  assetPath: "assets/icons/helmet.png",
+                                ),
+                                HomePageItem(
+                                  pageName: "Races",
+                                  route: () => Router.of(context).push().schedule(),
+                                  assetPath: "assets/icons/award.png",
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                }
+                  return
+                  null;
+                }
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  Future<void> fetchDrivers() async{
+  Future<void> fetchDrivers() async {
     var injector = Injector.of(context);
     DriverService service = injector.get();
-    Map<String,Driver> map = await service.getDrivers();
-    injector.register(value: map,qualifier: #drivers);
+    Map<String, Driver> map = await service.getDrivers();
+    injector.register(value: map, qualifier: #drivers);
   }
 }
