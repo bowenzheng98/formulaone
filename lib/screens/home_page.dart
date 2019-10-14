@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/driver.dart';
 import 'package:fonetracker/services/driver_service.dart';
 import 'package:fonetracker/inject/injector.dart';
+import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/utils/router.dart';
 import 'package:fonetracker/widgets/homepage_item.dart';
 
@@ -64,11 +65,13 @@ class _HomePageState extends State<HomePage> {
                                           .push()
                                           .driverStandings(),
                                   assetPath: "assets/icons/helmet.png",
+                                  color: Styles.accent_red,
                                 ),
                                 HomePageItem(
                                   pageName: "Races",
                                   route: () => Router.of(context).push().schedule(),
                                   assetPath: "assets/icons/award.png",
+                                  color: Styles.accent_yellow,
                                 ),
                               ],
                             ),

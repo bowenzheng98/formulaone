@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 class Styles{
   static const Color grey = Color(0xff616161);
 
-  static const ColorFilter desaturatedColorFilter =
-  // 222222 is a random color that has low color saturation.
-  ColorFilter.mode(Color(0xFF222222), BlendMode.saturation);
+  static const Color accent_red = Color.fromRGBO(255, 59, 48, accent_opacity);
+  
+  static const Color accent_yellow = Color.fromRGBO(255, 204, 0, accent_opacity);
+
+  static const double accent_opacity =  0.4;
 }

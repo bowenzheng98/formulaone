@@ -8,12 +8,13 @@ class HomePageItem extends StatelessWidget {
   final String pageName;
   final VoidCallback route;
   final String assetPath;
+  final Color color;
 
   const HomePageItem({
     Key key,
     this.pageName,
     this.route,
-    this.assetPath,
+    this.assetPath, this.color,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class HomePageItem extends StatelessWidget {
         onTap: route,
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -52,6 +53,7 @@ class HomePageItem extends StatelessWidget {
                   right: 0,
                   child: ItemDetails(
                     pageName: pageName,
+                    color: color,
                   ),
                 )
               ],
@@ -65,18 +67,17 @@ class HomePageItem extends StatelessWidget {
 
 class ItemDetails extends StatelessWidget {
   final String pageName;
+  final Color color;
 
-  const ItemDetails({Key key, this.pageName}) : super(key: key);
+  const ItemDetails({Key key, this.pageName, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FrostyBackground(
-      color: Color(0x90ffffff),
+    return Accent(
+      color: color,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          decoration: BoxDecoration(
-          ),
           height: 50.0,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,9 +86,8 @@ class ItemDetails extends StatelessWidget {
                 pageName,
                 style: TextStyle(
                   fontSize: 22.0,
-                  color: Colors.white,
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -96,26 +96,22 @@ class ItemDetails extends StatelessWidget {
   }
 }
 
-class FrostyBackground extends StatelessWidget {
+class Accent extends StatelessWidget {
   final Color color;
-  final double intensity;
   final Widget child;
 
-  const FrostyBackground({Key key, this.color, this.intensity = 25, this.child})
-      : super(key: key);
+  const Accent({Key key, this.color, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: intensity, sigmaY: intensity),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: color,
-          ),
-          child: child,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: color,
         ),
-      ),
+        child: child,
+      )
     );
   }
+
 }
