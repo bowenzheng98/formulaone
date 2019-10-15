@@ -11,5 +11,5 @@ class Styles{
   
   static const Color accent_yellow = Color.fromRGBO(255, 204, 0, accent_opacity);
 
-  static const double accent_opacity =  0.4;
+  static const double accent_opacity =  0.3;
 }

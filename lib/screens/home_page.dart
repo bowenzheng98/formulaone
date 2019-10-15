@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                         HomePageItem(
                           pageName: "Races",
                           route: () => Router.of(context).push().schedule(),
-                          assetPath: "assets/icons/award.png",
+                          assetPath: "assets/icons/running-track.png",
                           color: Styles.accent_yellow,
                         ),
                       ])),
