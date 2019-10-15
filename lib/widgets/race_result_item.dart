@@ -44,10 +44,12 @@ class _RaceResultItemState extends State<RaceResultItem>{
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           child: Row(
             children: <Widget>[
-              SizedBox(width: 15.0 ,child: Text(widget.result.position.toString())),
+              SizedBox(width: 20.0 ,child: Text(widget.result.position.toString())),
               VerticalDivider(thickness: 1.0,),
               SizedBox(width: 5.0,),
               Text(driver.giveName + " " + driver.familyName),
+              Spacer(),
+              Text(widget.result.points.toString())
             ],
           ),
         ),

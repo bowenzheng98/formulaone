@@ -8,8 +8,10 @@ class Styles{
   static const Color light_font = Color.fromRGBO(142, 142, 147, 1.0);
 
   static const Color background_grey = Color.fromRGBO(242, 242, 247, 1.0);
+  
+  static const Color background_grey2 = Color.fromRGBO(209, 209, 214, 1.0);
 
-  static const Color background_grey2 = Color.fromRGBO(199, 199, 204, 1.0);
+  static const Color background_grey3 = Color.fromRGBO(199, 199, 204, 1.0);
 
   static const Color accent_red = Color.fromRGBO(255, 59, 48, accent_opacity);
   

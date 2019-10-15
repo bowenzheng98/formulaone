@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/models/result.dart';
 import 'package:fonetracker/services/race_results_service.dart';
+import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
 
 class RacePage extends StatefulWidget {
@@ -43,32 +45,36 @@ class _RacePageState extends State<RacePage> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        backgroundColor: Colors.white,
         leading: GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: Icon(CupertinoIcons.back, size: 25.0)),
         middle: Text(widget.race.raceName),
       ),
-      child: SafeArea(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            SizedBox(
-              width: 500.0,
-              child: CupertinoSegmentedControl<int>(
-                children: segmentWidgets,
-                groupValue: currentSegment,
-                onValueChanged: (int val) {
-                  setState(() {
-                    currentSegment = val;
-                  });
-                },
+      child: Container(
+        color: Styles.background_grey,
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20.0),
+              SizedBox(
+                width: 500.0,
+                child: CupertinoSegmentedControl<int>(
+                  children: segmentWidgets,
+                  groupValue: currentSegment,
+                  onValueChanged: (int val) {
+                    setState(() {
+                      currentSegment = val;
+                    });
+                  },
+                ),
               ),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            Expanded(child: page[currentSegment]),
-          ],
+              SizedBox(
+                height: 8.0,
+              ),
+              Expanded(child: page[currentSegment]),
+            ],
+          ),
         ),
       ),
     );
@@ -104,10 +110,10 @@ class _RacePageState extends State<RacePage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(4.0),
             child: new CupertinoScrollbar(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ListView(
                   children: <Widget>[
                     for (RaceResult result in snapshot.data)
