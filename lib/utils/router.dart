@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fonetracker/models/race.dart';
+import 'package:fonetracker/screens/latest_result_page.dart';
 import 'package:fonetracker/screens/race_page.dart';
 import 'package:fonetracker/screens/schedule_page.dart';
 import 'package:fonetracker/screens/standings_page.dart';
@@ -20,6 +21,8 @@ class _Routes<R> {
   R schedule() => _execute((BuildContext context) => SchedulePage());
 
   R raceDetails(Race race) => _execute((BuildContext context) => RacePage(race: race));
+
+  R latestResults() => _execute((BuildContext context) => LatestResultPage());
 }
 
 /// Idiomatic API for pushing routes

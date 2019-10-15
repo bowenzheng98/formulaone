@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/driver.dart';
 import 'package:fonetracker/models/result.dart';
+import 'package:fonetracker/widgets/list_item.dart';
 
 class RaceResultItem extends StatefulWidget{
 
@@ -31,18 +33,24 @@ class _RaceResultItemState extends State<RaceResultItem>{
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return CustomListItem(
+      padding: 4.0,
+      radius: Radius.circular(8.0),
+      blurRadius: 0.2,
       height: 45.0,
-      child: Row(
-        children: <Widget>[
-          SizedBox(width: 25.0 ,child: Text(widget.result.position.toString())),
-          SizedBox(width: 20.0,),
-          SizedBox(width: 30.0, child: Text(widget.result.driverNumber.toString()),),
-          SizedBox(width: 10.0,),
-          Text(driver.giveName + " " + driver.familyName),
-          Spacer(),
-          Text(widget.result.points.toString()),
-        ],
+      child: new Container(
+        height: 45.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: 15.0 ,child: Text(widget.result.position.toString())),
+              VerticalDivider(thickness: 1.0,),
+              SizedBox(width: 5.0,),
+              Text(driver.giveName + " " + driver.familyName),
+            ],
+          ),
+        ),
       ),
     );
   }

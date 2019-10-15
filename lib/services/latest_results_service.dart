@@ -2,10 +2,10 @@ import 'package:fonetracker/models/result.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-class RaceResultsService{
+class LatestResultsService{
 
-  Future<List<RaceResult>> getRaceResults(int round) async {
-    var url =  "http://ergast.com/api/f1/current/" + round.toString() + "/results.json";
+  Future<List<RaceResult>> getLatestResults() async {
+    var url = "http://ergast.com/api/f1/current/last/results.json";
     var response = await http.get(url);
     var json = convert.json.decode(response.body);
     if ((json["MRData"]["RaceTable"]["Races"] as List).isEmpty ){

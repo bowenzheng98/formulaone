@@ -15,23 +15,36 @@ class StandingsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomListItem(
-      padding: 2.0,
+      padding: 4.0,
       radius: Radius.circular(8.0),
       blurRadius: 0.1,
       height: 45.0,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            Image(
-                image: AssetImage("assets/flags/" + CountryCode.getCountryCode(driver.nationality) + ".png")
-            ),
-            VerticalDivider(),
-            Text(driver.giveName + " " + driver.familyName),
-            Spacer(),
-            Text(points.toString())
-          ],
-        ),
+      child: Row(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), bottomLeft: Radius.circular(8.0)),
+                  child: Container(
+                    height: 45.0,
+                    color: Styles.background_grey2,
+                    child: Image(
+                        image: AssetImage("assets/flags/" + CountryCode.getCountryCode(driver.nationality) + ".png")
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(driver.giveName + " " + driver.familyName),
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(points.toString()),
+          )
+        ],
       ),
     );
   }

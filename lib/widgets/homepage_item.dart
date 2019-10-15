@@ -7,6 +7,7 @@ import 'package:fonetracker/styles.dart';
 
 class HomePageItem extends StatelessWidget {
   final String pageName;
+  final String details;
   final VoidCallback route;
   final String assetPath;
   final Color color;
@@ -15,7 +16,7 @@ class HomePageItem extends StatelessWidget {
     Key key,
     this.pageName,
     this.route,
-    this.assetPath, this.color,
+    this.assetPath, this.color, this.details,
   }) : super(key: key);
 
   @override
@@ -54,6 +55,7 @@ class HomePageItem extends StatelessWidget {
                   right: 0,
                   child: ItemDetails(
                     pageName: pageName,
+                    details: details,
                     color: color,
                   ),
                 )
@@ -68,9 +70,10 @@ class HomePageItem extends StatelessWidget {
 
 class ItemDetails extends StatelessWidget {
   final String pageName;
+  final String details;
   final Color color;
 
-  const ItemDetails({Key key, this.pageName, this.color}) : super(key: key);
+  const ItemDetails({Key key, this.pageName, this.color, this.details}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +90,16 @@ class ItemDetails extends StatelessWidget {
                 pageName,
                 style: TextStyle(
                   fontSize: 22.0,
+                ),
+              ),
+              const SizedBox(
+                height: 6.0,
+              ),
+              Text(
+                details,
+                style: TextStyle(
+                  color: Styles.light_font,
+                  fontWeight: FontWeight.w300,
                 ),
               )
             ],

@@ -10,14 +10,12 @@ import 'package:fonetracker/services/standings_service.dart';
 import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/widgets/standings_item.dart';
 
-class DriverStandingsPage extends StatefulWidget{
-
+class DriverStandingsPage extends StatefulWidget {
   @override
   _DriverStandingsState createState() => _DriverStandingsState();
 }
 
 class _DriverStandingsState extends State<DriverStandingsPage> {
-
   Map<String, Driver> drivers;
   Inject injector;
   bool isLoading;
@@ -39,20 +37,9 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
         leading: Container(
           child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: Icon(CupertinoIcons.back, size: 25.0)
-          ),
+              child: Icon(CupertinoIcons.back, size: 25.0)),
         ),
-        middle: FutureBuilder<Standings>(
-          future: standings,
-          builder: (context, snapshot){
-            if(snapshot.hasData){
-              return new Text(
-                snapshot.data.season.toString() + " Standings Round " + snapshot.data.round.toString()
-              );
-            }
-            return new Text("Standings");
-          },
-        ),
+        middle: Text("Standings"),
       ),
       child: Container(
         color: Styles.background_grey,
@@ -60,15 +47,30 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
           child: Center(
             child: FutureBuilder<Standings>(
               future: standings,
-              builder: (context, snapshot){
-                if(snapshot.hasData){
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
                   return new CupertinoScrollbar(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListView(
                         children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),
+                            child: Text(snapshot.data.season.toString() +
+                                " Round " +
+                                snapshot.data.round.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
                           for (Standing standing in snapshot.data.standings)
-                            StandingsItem(driver: drivers[standing.driver], points: standing.points,)
+                            StandingsItem(
+                              driver: drivers[standing.driver],
+                              points: standing.points,
+                            )
                         ],
                       ),
                     ),
@@ -84,7 +86,7 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
   }
 
   Future<Standings> fetchData() async {
-    if (injector.get<Standings>(qualifier: #standings) == null){
+    if (injector.get<Standings>(qualifier: #standings) == null) {
       var data = await StandingsService().getStandings();
       injector.register(value: data, qualifier: #standings);
       return data;

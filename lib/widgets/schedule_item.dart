@@ -21,10 +21,10 @@ class _ScheduleItemState extends State<ScheduleItem>{
   @override
   Widget build(BuildContext context) {
     return CustomListItem(
-      padding: 2.0,
+      padding: 4.0,
       radius: Radius.circular(8.0),
-      blurRadius: 0.1,
-      height: 65.0,
+      blurRadius: 0.8,
+      height: 55.0,
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         child: Padding(

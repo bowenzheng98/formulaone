@@ -17,7 +17,7 @@ class DriverService{
       for (var driver in (json["MRData"]["DriverTable"]["Drivers"] as List)){
         driverMap.putIfAbsent(driver["driverId"], () => Driver.fromJson(driver));
       }
-      return driverMap;
     }
+    return driverMap;
   }
 }

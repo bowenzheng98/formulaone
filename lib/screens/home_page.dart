@@ -40,29 +40,43 @@ class _HomePageState extends State<HomePage> {
                   );
                 case ConnectionState.done:
                   return new Container(
-                    child: CustomScrollView(slivers: <Widget>[
-                      CupertinoSliverNavigationBar(
-                        largeTitle: Text("Formula Home"),
-                        backgroundColor: Colors.white,
-                        border: Border(bottom: BorderSide(style: BorderStyle.none)),
-                      ),
-                      SliverList(
-                          delegate: SliverChildListDelegate([
-                        HomePageItem(
-                          pageName: "Driver Standings",
-                          route: () =>
-                              Router.of(context).push().driverStandings(),
-                          assetPath: "assets/icons/helmet.png",
-                          color: Styles.accent_red,
-                        ),
-                        HomePageItem(
-                          pageName: "Races",
-                          route: () => Router.of(context).push().schedule(),
-                          assetPath: "assets/icons/running-track.png",
-                          color: Styles.accent_yellow,
-                        ),
-                      ])),
-                    ]),
+                    child: CustomScrollView(
+                        physics: ClampingScrollPhysics(),
+                        slivers: <Widget>[
+                          CupertinoSliverNavigationBar(
+                            largeTitle: Text("Formula Home"),
+                            backgroundColor: Colors.white,
+                            border: Border(
+                                bottom: BorderSide(style: BorderStyle.none)),
+                          ),
+                          SliverList(
+                              delegate: SliverChildListDelegate([
+                            HomePageItem(
+                              pageName: "Driver Standings",
+                              details: "Standings for the current season",
+                              route: () =>
+                                  Router.of(context).push().driverStandings(),
+                              assetPath: "assets/icons/helmet.png",
+                              color: Styles.accent_red,
+                            ),
+                            HomePageItem(
+                              pageName: "Latest Results",
+                              details: "Results from the last race",
+                              route: () =>
+                                  Router.of(context).push().latestResults(),
+                              assetPath: "assets/icons/winner.png",
+                              color: Styles.accent_orange,
+                            ),
+                            HomePageItem(
+                              pageName: "Races",
+                              details:
+                                  "Races and results of the current season",
+                              route: () => Router.of(context).push().schedule(),
+                              assetPath: "assets/icons/running-track.png",
+                              color: Styles.accent_yellow,
+                            ),
+                          ])),
+                        ]),
                   );
               }
               return null;
