@@ -40,7 +40,7 @@ class _LatestResultPageState extends State<LatestResultPage> {
           middle: Text("Latest Results"),
       ),
       child: Container(
-        color: Styles.background_grey,
+        color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
           child: FutureBuilder<List<RaceResult>>(
             future: latestReults,

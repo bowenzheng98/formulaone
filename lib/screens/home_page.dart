@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                               color: Styles.accent_orange,
                             ),
                             HomePageItem(
-                              pageName: "Races",
+                              pageName: "Race Schedule",
                               details:
                                   "Races and results of the current season",
                               route: () => Router.of(context).push().schedule(),

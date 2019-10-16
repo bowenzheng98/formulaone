@@ -4,6 +4,7 @@ import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/driver.dart';
 import 'package:fonetracker/models/result.dart';
+import 'package:fonetracker/utils/position_parse.dart';
 import 'package:fonetracker/widgets/list_item.dart';
 
 class RaceResultItem extends StatefulWidget{
@@ -45,11 +46,13 @@ class _RaceResultItemState extends State<RaceResultItem>{
           child: Row(
             children: <Widget>[
               SizedBox(width: 20.0 ,child: Text(widget.result.position.toString())),
-              VerticalDivider(thickness: 1.0,),
+              const VerticalDivider(thickness: 1.0,),
               SizedBox(width: 5.0,),
               Text(driver.giveName + " " + driver.familyName),
               Spacer(),
-              Text(widget.result.points.toString())
+              Text(parsePositionText(widget.result.positionText)),
+              const VerticalDivider(thickness: 1.0,),
+              SizedBox(width: 18.0, child: Text(widget.result.points.toString()))
             ],
           ),
         ),

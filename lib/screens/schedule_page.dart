@@ -38,7 +38,7 @@ class _SchedulePageState extends State<SchedulePage>{
         middle: Text("Schedule"),
       ),
       child: Container(
-        color: Styles.background_grey,
+        color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
           child: Center(
             child: FutureBuilder<List<Race>>(

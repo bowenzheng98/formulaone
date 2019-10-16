@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/driver.dart';
@@ -27,7 +28,7 @@ class StandingsItem extends StatelessWidget {
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), bottomLeft: Radius.circular(8.0)),
                   child: Container(
                     height: 45.0,
-                    color: Styles.background_grey2,
+                    color: CupertinoColors.lightBackgroundGray,
                     child: Image(
                         image: AssetImage("assets/flags/" + CountryCode.getCountryCode(driver.nationality) + ".png")
                     ),

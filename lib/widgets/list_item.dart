@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -24,7 +25,7 @@ class CustomListItem extends StatelessWidget {
             borderRadius: BorderRadius.all(radius),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Styles.shadow_grey,
+                color: CupertinoColors.darkBackgroundGray,
                 blurRadius: blurRadius,
               )
             ]),

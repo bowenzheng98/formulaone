@@ -52,7 +52,7 @@ class _RacePageState extends State<RacePage> {
         middle: Text(widget.race.raceName),
       ),
       child: Container(
-        color: Styles.background_grey,
+        color: CupertinoColors.lightBackgroundGray,
         child: SafeArea(
           child: Column(
             children: <Widget>[

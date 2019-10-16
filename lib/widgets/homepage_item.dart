@@ -23,18 +23,12 @@ class HomePageItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
-      child: GestureDetector(
-        onTap: route,
+      child: PressableCard(
+        onPressed: route,
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Styles.shadow_grey,
-                  blurRadius: 8.0,
-                )
-              ]),
+            color: CupertinoColors.white,
+          ),
           height: 300.0,
           width: 400.0,
           child: ClipRRect(
@@ -98,7 +92,7 @@ class ItemDetails extends StatelessWidget {
               Text(
                 details,
                 style: TextStyle(
-                  color: Styles.light_font,
+                  color: CupertinoColors.inactiveGray,
                   fontWeight: FontWeight.w300,
                 ),
               )
@@ -128,4 +122,70 @@ class Accent extends StatelessWidget {
     );
   }
 
+}
+
+class PressableCard extends StatefulWidget {
+  const PressableCard({
+    @required this.child,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
+    this.upElevation = 4,
+    this.downElevation = 2,
+    this.shadowColor = CupertinoColors.black,
+    this.duration = const Duration(milliseconds: 100),
+    this.onPressed,
+    Key key,
+  })  : assert(child != null),
+        assert(borderRadius != null),
+        assert(upElevation != null),
+        assert(downElevation != null),
+        assert(shadowColor != null),
+        assert(duration != null),
+        super(key: key);
+
+  final VoidCallback onPressed;
+
+  final Widget child;
+
+  final BorderRadius borderRadius;
+
+  final double upElevation;
+
+  final double downElevation;
+
+  final Color shadowColor;
+
+  final Duration duration;
+
+  @override
+  _PressableCardState createState() => _PressableCardState();
+}
+
+class _PressableCardState extends State<PressableCard> {
+  bool cardIsDown = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() => cardIsDown = false);
+        if (widget.onPressed != null) {
+          widget.onPressed();
+        }
+      },
+      onTapDown: (details) => setState(() => cardIsDown = true),
+      onTapCancel: () => setState(() => cardIsDown = false),
+      child: AnimatedPhysicalModel(
+        elevation: cardIsDown ? widget.downElevation : widget.upElevation,
+        borderRadius: widget.borderRadius,
+        shape: BoxShape.rectangle,
+        shadowColor: widget.shadowColor,
+        duration: widget.duration,
+        color: CupertinoColors.lightBackgroundGray,
+        child: ClipRRect(
+          borderRadius: widget.borderRadius,
+          child: widget.child,
+        ),
+      ),
+    );
+  }
 }

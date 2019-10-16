@@ -42,7 +42,7 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
         middle: Text("Standings"),
       ),
       child: Container(
-        color: Styles.background_grey,
+        color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
           child: Center(
             child: FutureBuilder<Standings>(
