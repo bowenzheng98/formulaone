@@ -42,9 +42,11 @@ class _SchedulePageState extends State<SchedulePage>{
                 if(snapshot.hasData){
                   return CupertinoScrollbar(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ListView(
+                        physics: ClampingScrollPhysics(),
                         children: <Widget>[
+                          SizedBox(height: 8.0,),
                           for (Race race in snapshot.data)
                             ScheduleItem(race: race,)
                         ],

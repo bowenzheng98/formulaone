@@ -6,7 +6,7 @@ import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/latest.dart';
 import 'package:fonetracker/models/result.dart';
 import 'package:fonetracker/services/latest_results_service.dart';
-import 'package:fonetracker/styles.dart';
+
 import 'package:fonetracker/widgets/race_result_item.dart';
 
 class LatestResultPage extends StatefulWidget {

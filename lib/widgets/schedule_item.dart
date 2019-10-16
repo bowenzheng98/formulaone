@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/models/race.dart';
+import 'package:fonetracker/screens/race_page.dart';
 import 'package:fonetracker/utils/router.dart';
 import 'package:fonetracker/widgets/list_item.dart';
 
@@ -17,7 +18,18 @@ class ScheduleItem extends StatefulWidget{
 
 }
 
-class _ScheduleItemState extends State<ScheduleItem>{
+class _ScheduleItemState extends State<ScheduleItem> with TickerProviderStateMixin{
+
+  AnimationController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 500), vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomListItem(
@@ -39,7 +51,12 @@ class _ScheduleItemState extends State<ScheduleItem>{
             ],
           ),
         ),
-        onTap: () => Router.of(context).push().raceDetails(widget.race),
+        onTap: (){
+          Navigator.of(context).push<void>(CupertinoPageRoute(
+            builder: (context) => RacePage(race: widget.race,),
+            fullscreenDialog: true,
+          ));
+        },
       ),
     );
   }

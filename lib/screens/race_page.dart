@@ -47,7 +47,6 @@ class _RacePageState extends State<RacePage> {
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.white,
         middle: Text(widget.race.raceName),
-        previousPageTitle: "Schedule",
       ),
       child: Container(
         color: CupertinoColors.lightBackgroundGray,

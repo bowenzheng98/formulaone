@@ -17,12 +17,10 @@ class MyApp extends StatelessWidget {
         theme: CupertinoThemeData(
           primaryColor: Styles.grey,
           textTheme: CupertinoTextThemeData(
+            primaryColor: Styles.grey,
             textStyle: TextStyle(
                 fontFamily: 'SFDisplayPro', color: Colors.black,
             ),
-            navActionTextStyle: TextStyle(
-              color: CupertinoColors.activeGreen,
-            )
           )
         ),
         home: HomePage(),
