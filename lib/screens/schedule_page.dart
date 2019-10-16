@@ -29,13 +29,8 @@ class _SchedulePageState extends State<SchedulePage>{
     return new CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.white,
-        leading: Container(
-          child: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Icon(CupertinoIcons.back, size: 25.0,)
-          ),
-        ),
         middle: Text("Schedule"),
+        previousPageTitle: "Home",
       ),
       child: Container(
         color: CupertinoColors.extraLightBackgroundGray,

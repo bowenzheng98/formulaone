@@ -46,10 +46,8 @@ class _RacePageState extends State<RacePage> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Icon(CupertinoIcons.back, size: 25.0)),
         middle: Text(widget.race.raceName),
+        previousPageTitle: "Schedule",
       ),
       child: Container(
         color: CupertinoColors.lightBackgroundGray,

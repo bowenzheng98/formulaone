@@ -34,11 +34,7 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.white,
-        leading: Container(
-          child: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Icon(CupertinoIcons.back, size: 25.0)),
-        ),
+        previousPageTitle: "Home",
         middle: Text("Standings"),
       ),
       child: Container(
