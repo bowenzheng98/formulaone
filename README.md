@@ -6,6 +6,7 @@ Functionality:
 - Current season standings
 - Results for the last race
 - Schedule for the current season
+- Results for a race in the current season
 
 Pages:
 - Home Page
