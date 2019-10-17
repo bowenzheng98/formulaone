@@ -6,8 +6,8 @@ import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/models/result.dart';
 import 'package:fonetracker/services/race_results_service.dart';
-import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
+import 'package:intl/intl.dart';
 
 class RacePage extends StatefulWidget {
   final Race race;
@@ -45,15 +45,20 @@ class _RacePageState extends State<RacePage> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        backgroundColor: Colors.white,
-        middle: Text(widget.race.raceName),
+        backgroundColor: CupertinoColors.lightBackgroundGray,
+        leading: GestureDetector(
+          child: Icon(CupertinoIcons.clear_thick_circled, size: 25.0,),
+          onTap: () => Navigator.of(context).pop(),
+        ),
+        middle: Text(widget.race.raceName,),
       ),
       child: Container(
-        color: CupertinoColors.lightBackgroundGray,
+        color: CupertinoColors.white,
         child: SafeArea(
+          bottom: false,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               SizedBox(
                 width: 500.0,
                 child: CupertinoSegmentedControl<int>(
@@ -66,7 +71,7 @@ class _RacePageState extends State<RacePage> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               Expanded(child: page[currentSegment]),
@@ -78,25 +83,30 @@ class _RacePageState extends State<RacePage> {
   }
 
   Widget _buildDetails(Race race) {
+    final DateFormat dateFormat = new DateFormat('dd-MM-yy').add_jm();
+    final DateFormat timeFormat = new DateFormat.Hm();
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(race.raceName),
-        SizedBox(
-          height: 8.0,
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(race.ciruit.circuitName, style: TextStyle(fontWeight: FontWeight.w500),),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                "Start time : " +
+                dateFormat.format(race.date.toLocal()).toString(),
+                style: TextStyle(fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
         ),
-        Text(race.round.toString()),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(race.season.toString()),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(race.ciruit.circuitName),
-        SizedBox(
-          height: 8.0,
-        ),
+
+        Image.asset("assets/circuits/"+race.ciruit.circuitId+".png")
       ],
     );
   }

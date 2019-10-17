@@ -35,6 +35,7 @@ class _SchedulePageState extends State<SchedulePage>{
       child: Container(
         color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
+          bottom: false,
           child: Center(
             child: FutureBuilder<List<Race>>(
               future: schedule,
@@ -46,7 +47,7 @@ class _SchedulePageState extends State<SchedulePage>{
                       child: ListView(
                         physics: ClampingScrollPhysics(),
                         children: <Widget>[
-                          SizedBox(height: 8.0,),
+                          const SizedBox(height: 8.0,),
                           for (Race race in snapshot.data)
                             ScheduleItem(race: race,)
                         ],

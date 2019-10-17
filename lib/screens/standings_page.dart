@@ -40,6 +40,7 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
       child: Container(
         color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
+          bottom: false,
           child: Center(
             child: FutureBuilder<Standings>(
               future: standings,
@@ -47,9 +48,10 @@ class _DriverStandingsState extends State<DriverStandingsPage> {
                 if (snapshot.hasData) {
                   return new CupertinoScrollbar(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
                       child: ListView(
                         children: <Widget>[
+                          const SizedBox(height: 16.0),
                           Padding(
                             padding:
                                 const EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),

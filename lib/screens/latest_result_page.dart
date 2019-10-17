@@ -36,6 +36,7 @@ class _LatestResultPageState extends State<LatestResultPage> {
       child: Container(
         color: CupertinoColors.extraLightBackgroundGray,
         child: SafeArea(
+          bottom: false,
             child: FutureBuilder<LatestResult>(
           future: latestResults,
           builder:
@@ -43,9 +44,10 @@ class _LatestResultPageState extends State<LatestResultPage> {
             if (snapshot.hasData) {
               return CupertinoScrollbar(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ListView(
                     children: <Widget>[
+                      const SizedBox(height: 16.0),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),
                         child: Text(

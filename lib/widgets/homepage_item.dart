@@ -129,7 +129,7 @@ class PressableCard extends StatefulWidget {
     @required this.child,
     this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
     this.upElevation = 4,
-    this.downElevation = 2,
+    this.downElevation = 0.8,
     this.shadowColor = CupertinoColors.black,
     this.duration = const Duration(milliseconds: 100),
     this.onPressed,

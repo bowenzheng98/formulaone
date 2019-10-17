@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SafeArea(
+        bottom: false,
         child: FutureBuilder<void>(
             future: drivers,
             builder: (context, snapshot) {
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
               return null;
             }),
       ),
+
     );
   }
 

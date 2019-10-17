@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   synchronized: ^2.1.0+1
   http: ^0.12.0+2
+  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +46,7 @@ flutter:
   assets:
     - assets/flags/
     - assets/icons/
+    - assets/circuits/
 
 
   fonts:
