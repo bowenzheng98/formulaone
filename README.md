@@ -6,13 +6,13 @@ Circuit images courtesy of [formula1.com](https://www.formula1.com/)
 
 Icons courtesy of [FlatIcon](https://www.flaticon.com/)
 
-Functionality: 
+## Functionality
 - Current season standings
 - Results for the last race
 - Schedule for the current season
 - Results for a race in the current season
 
-Pages:
+## Pages
 - Home Page
 ![alt tag](https://user-images.githubusercontent.com/26814567/67003267-12f5b300-f13a-11e9-9f55-795a589bae5c.png)
 - Driver Standings
