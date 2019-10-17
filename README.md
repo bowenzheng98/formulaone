@@ -2,6 +2,10 @@
 
 A Flutter mobile application consumer for the [Ergast API](https://ergast.com/mrd/)
 
+Circuit images courtesy of [formula1.com](https://www.formula1.com/)
+
+Icons courtesy of [FlatIcon](https://www.flaticon.com/)
+
 Functionality: 
 - Current season standings
 - Results for the last race
