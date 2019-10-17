@@ -98,7 +98,7 @@ class _RacePageState extends State<RacePage> {
                 height: 8.0,
               ),
               Text(
-                "Start time : " +
+                "Start time (local) : " +
                 dateFormat.format(race.date.toLocal()).toString(),
                 style: TextStyle(fontWeight: FontWeight.w300),
               ),
