@@ -53,17 +53,22 @@ class _RacePageState extends State<RacePage> {
     };
 
     return SwipeDetector(
-      onSwipeDown: (){
+      onSwipeDown: () {
         Navigator.of(context).pop();
       },
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           backgroundColor: CupertinoColors.lightBackgroundGray,
           leading: GestureDetector(
-            child: Icon(CupertinoIcons.clear_thick_circled, size: 25.0,),
+            child: Icon(
+              CupertinoIcons.clear_thick_circled,
+              size: 25.0,
+            ),
             onTap: () => Navigator.of(context).pop(),
           ),
-          middle: Text(widget.race.raceName,),
+          middle: Text(
+            widget.race.raceName,
+          ),
         ),
         child: Container(
           color: CupertinoColors.white,
@@ -87,7 +92,24 @@ class _RacePageState extends State<RacePage> {
                 const SizedBox(
                   height: 8.0,
                 ),
-                Expanded(child:page[currentSegment],)
+                Expanded(
+                  child: SwipeDetector(
+                      onSwipeLeft: () {
+                        if (currentSegment < 2) {
+                          setState(() {
+                            currentSegment++;
+                          });
+                        }
+                      },
+                      onSwipeRight: () {
+                        if (currentSegment > 0){
+                          setState(() {
+                            currentSegment--;
+                          });
+                        }
+                      },
+                      child: page[currentSegment]),
+                )
               ],
             ),
           ),
@@ -107,22 +129,25 @@ class _RacePageState extends State<RacePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(race.ciruit.circuitName, style: TextStyle(fontWeight: FontWeight.w500),),
+              Text(
+                race.ciruit.circuitName,
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               const SizedBox(
                 height: 8.0,
               ),
               Text(
                 "Start time (local) : " +
-                dateFormat.format(race.date.toLocal()).toString(),
+                    dateFormat.format(race.date.toLocal()).toString(),
                 style: TextStyle(fontWeight: FontWeight.w300),
               ),
             ],
           ),
         ),
-
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/circuits/"+race.ciruit.circuitId+".png"),
+          child:
+              Image.asset("assets/circuits/" + race.ciruit.circuitId + ".png"),
         )
       ],
     );
@@ -148,7 +173,8 @@ class _RacePageState extends State<RacePage> {
             ),
           );
         }
-        if (snapshot.connectionState == ConnectionState.done && snapshot.data == null) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data == null) {
           return new SizedBox.shrink();
         }
         return new Center(
@@ -162,8 +188,10 @@ class _RacePageState extends State<RacePage> {
     return new FutureBuilder<List<QualifyingResult>>(
       future: qualifying,
       builder: (context, snapshot) {
-        if (snapshot.hasData){
-          return QualifyingGrid(qualifying: snapshot.data,);
+        if (snapshot.hasData) {
+          return QualifyingGrid(
+            qualifying: snapshot.data,
+          );
 //          return Padding(
 //            padding: const EdgeInsets.all(4.0),
 //            child: new CupertinoScrollbar(
@@ -179,7 +207,8 @@ class _RacePageState extends State<RacePage> {
 //            ),
 //          );
         }
-        if (snapshot.connectionState == ConnectionState.done && snapshot.data == null) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data == null) {
           return new SizedBox.shrink();
         }
         return new Center(
@@ -188,9 +217,10 @@ class _RacePageState extends State<RacePage> {
       },
     );
   }
-  
+
   Future<List<QualifyingResult>> fetchQualifyingResults() async {
-    return await QualifyingResultsService().getQualifyingResults(widget.race.round);
+    return await QualifyingResultsService()
+        .getQualifyingResults(widget.race.round);
   }
 
   Future<List<RaceResult>> fetchRaceResults() async {
