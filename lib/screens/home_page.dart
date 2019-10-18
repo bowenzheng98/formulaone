@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 case ConnectionState.done:
                   return new Container(
+                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
                     child: CustomScrollView(
                         physics: ClampingScrollPhysics(),
                         slivers: <Widget>[
