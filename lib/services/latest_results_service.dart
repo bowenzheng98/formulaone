@@ -17,7 +17,6 @@ class LatestResultsService{
     LatestResult latestResult = new LatestResult();
     latestResult.round  = int.parse(json["MRData"]["RaceTable"]["round"]);
     latestResult.results = results;
-    print(LatestResult);
     return latestResult;
   }
 }

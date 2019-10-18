@@ -8,6 +8,7 @@ import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/models/result.dart';
 import 'package:fonetracker/services/qualifying_results_service.dart';
 import 'package:fonetracker/services/race_results_service.dart';
+import 'package:fonetracker/widgets/qualifying_grid.dart';
 import 'package:fonetracker/widgets/qualifying_item.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
 import 'package:intl/intl.dart';
@@ -86,7 +87,7 @@ class _RacePageState extends State<RacePage> {
                 const SizedBox(
                   height: 8.0,
                 ),
-                Expanded(child: page[currentSegment]),
+                Expanded(child:page[currentSegment],)
               ],
             ),
           ),
@@ -162,20 +163,21 @@ class _RacePageState extends State<RacePage> {
       future: qualifying,
       builder: (context, snapshot) {
         if (snapshot.hasData){
-          return Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: new CupertinoScrollbar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView(
-                  children: <Widget>[
-                    for (QualifyingResult qualify in snapshot.data)
-                      QualifyingItem(qualifyingResult: qualify),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return QualifyingGrid(qualifying: snapshot.data,);
+//          return Padding(
+//            padding: const EdgeInsets.all(4.0),
+//            child: new CupertinoScrollbar(
+//              child: Padding(
+//                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//                child: ListView(
+//                  children: <Widget>[
+//                    for (QualifyingResult qualify in snapshot.data)
+//                      QualifyingItem(qualifyingResult: qualify),
+//                  ],
+//                ),
+//              ),
+//            ),
+//          );
         }
         if (snapshot.connectionState == ConnectionState.done && snapshot.data == null) {
           return new SizedBox.shrink();

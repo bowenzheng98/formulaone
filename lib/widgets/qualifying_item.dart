@@ -17,7 +17,6 @@ class QualifyingItem extends StatefulWidget {
 }
 
 class _QualifyingItemState extends State<QualifyingItem> {
-
   Inject injector;
   Map<String, Driver> drivers;
   Driver driver;
@@ -36,45 +35,26 @@ class _QualifyingItemState extends State<QualifyingItem> {
       padding: 4.0,
       radius: Radius.circular(8.0),
       blurRadius: 0.2,
-      height: 45.0,
+      height: 80.0,
       child: new Container(
         height: 45.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(width: 20.0 ,child: Text(widget.qualifyingResult.position.toString())),
-              const VerticalDivider(thickness: 1.0,),
-              SizedBox(width: 5.0,),
-              Text(driver.giveName + " " + driver.familyName),
-              Spacer(),
-              if (widget.qualifyingResult.q3 != null)
-                SizedBox(width: 80.0,
-                    child: Row(
-                      children: <Widget>[
-                        Text("Q3  ", style: TextStyle(fontWeight: FontWeight.w100),),
-                        Text(widget.qualifyingResult.q3)
-                      ],
-                    )
-                ),
-              if (widget.qualifyingResult.q3 == null && widget.qualifyingResult.q2 != null)
-                SizedBox(width: 80.0,
-                    child: Row(
-                      children: <Widget>[
-                        Text("Q2  ", style: TextStyle(fontWeight: FontWeight.w100),),
-                        Text(widget.qualifyingResult.q2)
-                      ],
-                    )
-                ),
-              if (widget.qualifyingResult.q3 == null && widget.qualifyingResult.q2 == null)
-                SizedBox(width: 80.0,
-                    child: Row(
-                      children: <Widget>[
-                        Text("Q1  ", style: TextStyle(fontWeight: FontWeight.w100),),
-                        Text(widget.qualifyingResult.q1)
-                      ],
-                    )
-                ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    widget.qualifyingResult.position.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 32.0,
+                    ),
+                  ),
+                  Text(driver.familyName),
+                ],
+              ),
             ],
           ),
         ),
