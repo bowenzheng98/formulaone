@@ -45,7 +45,6 @@ class _SchedulePageState extends State<SchedulePage>{
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ListView(
-                        physics: ClampingScrollPhysics(),
                         children: <Widget>[
                           const SizedBox(height: 8.0,),
                           for (Race race in snapshot.data)

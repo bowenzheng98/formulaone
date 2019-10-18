@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fonetracker/inject/inject.dart';
 import 'package:fonetracker/inject/injector.dart';
+import 'package:fonetracker/models/qualifying.dart';
 import 'package:fonetracker/models/race.dart';
 import 'package:fonetracker/models/result.dart';
+import 'package:fonetracker/services/qualifying_results_service.dart';
 import 'package:fonetracker/services/race_results_service.dart';
+import 'package:fonetracker/widgets/qualifying_item.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
 import 'package:intl/intl.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class RacePage extends StatefulWidget {
   final Race race;
@@ -23,6 +27,7 @@ class _RacePageState extends State<RacePage> {
   Map<int, Widget> page;
   Inject injector;
   Future<List<RaceResult>> results;
+  Future<List<QualifyingResult>> qualifying;
 
   @override
   void initState() {
@@ -30,9 +35,11 @@ class _RacePageState extends State<RacePage> {
     injector = Injector.of(context);
     currentSegment = 0;
     results = fetchRaceResults();
+    qualifying = fetchQualifyingResults();
     page = <int, Widget>{
       0: _buildDetails(widget.race),
-      1: _buildResults(),
+      1: _buildQualifyingResults(),
+      2: _buildResults(),
     };
   }
 
@@ -40,42 +47,48 @@ class _RacePageState extends State<RacePage> {
   Widget build(BuildContext context) {
     final Map<int, Widget> segmentWidgets = const <int, Widget>{
       0: Text("Details"),
-      1: Text("Results")
+      1: Text("Qualifying"),
+      2: Text("Results")
     };
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.lightBackgroundGray,
-        leading: GestureDetector(
-          child: Icon(CupertinoIcons.clear_thick_circled, size: 25.0,),
-          onTap: () => Navigator.of(context).pop(),
+    return SwipeDetector(
+      onSwipeDown: (){
+        Navigator.of(context).pop();
+      },
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          backgroundColor: CupertinoColors.lightBackgroundGray,
+          leading: GestureDetector(
+            child: Icon(CupertinoIcons.clear_thick_circled, size: 25.0,),
+            onTap: () => Navigator.of(context).pop(),
+          ),
+          middle: Text(widget.race.raceName,),
         ),
-        middle: Text(widget.race.raceName,),
-      ),
-      child: Container(
-        color: CupertinoColors.white,
-        child: SafeArea(
-          bottom: false,
-          child: Column(
-            children: <Widget>[
-              const SizedBox(height: 20.0),
-              SizedBox(
-                width: 500.0,
-                child: CupertinoSegmentedControl<int>(
-                  children: segmentWidgets,
-                  groupValue: currentSegment,
-                  onValueChanged: (int val) {
-                    setState(() {
-                      currentSegment = val;
-                    });
-                  },
+        child: Container(
+          color: CupertinoColors.white,
+          child: SafeArea(
+            bottom: false,
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 20.0),
+                SizedBox(
+                  width: 500.0,
+                  child: CupertinoSegmentedControl<int>(
+                    children: segmentWidgets,
+                    groupValue: currentSegment,
+                    onValueChanged: (int val) {
+                      setState(() {
+                        currentSegment = val;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 8.0,
-              ),
-              Expanded(child: page[currentSegment]),
-            ],
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Expanded(child: page[currentSegment]),
+              ],
+            ),
           ),
         ),
       ),
@@ -106,7 +119,10 @@ class _RacePageState extends State<RacePage> {
           ),
         ),
 
-        Image.asset("assets/circuits/"+race.ciruit.circuitId+".png")
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset("assets/circuits/"+race.ciruit.circuitId+".png"),
+        )
       ],
     );
   }
@@ -139,6 +155,40 @@ class _RacePageState extends State<RacePage> {
         );
       },
     );
+  }
+
+  Widget _buildQualifyingResults() {
+    return new FutureBuilder<List<QualifyingResult>>(
+      future: qualifying,
+      builder: (context, snapshot) {
+        if (snapshot.hasData){
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: new CupertinoScrollbar(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListView(
+                  children: <Widget>[
+                    for (QualifyingResult qualify in snapshot.data)
+                      QualifyingItem(qualifyingResult: qualify),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done && snapshot.data == null) {
+          return new SizedBox.shrink();
+        }
+        return new Center(
+          child: CupertinoActivityIndicator(),
+        );
+      },
+    );
+  }
+  
+  Future<List<QualifyingResult>> fetchQualifyingResults() async {
+    return await QualifyingResultsService().getQualifyingResults(widget.race.round);
   }
 
   Future<List<RaceResult>> fetchRaceResults() async {

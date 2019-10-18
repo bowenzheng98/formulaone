@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
                   return new Container(
                     padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
                     child: CustomScrollView(
-                        physics: ClampingScrollPhysics(),
                         slivers: <Widget>[
                           CupertinoSliverNavigationBar(
                             largeTitle: Text("Formula Home"),
