@@ -54,7 +54,7 @@ class _QualifyingGridState extends State<QualifyingGrid> {
                     ),
                     Container(
                     width: MediaQuery.of(context).size.width /2.2,
-                      margin: EdgeInsets.fromLTRB(0.0, 32.0, 0.0, 0.0),
+                      margin: EdgeInsets.fromLTRB(0.0, 52.0, 0.0, 0.0),
                       child: Column(
                         children: <Widget>[
                           for (QualifyingResult result in even)

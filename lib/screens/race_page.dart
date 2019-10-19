@@ -9,7 +9,6 @@ import 'package:fonetracker/models/result.dart';
 import 'package:fonetracker/services/qualifying_results_service.dart';
 import 'package:fonetracker/services/race_results_service.dart';
 import 'package:fonetracker/widgets/qualifying_grid.dart';
-import 'package:fonetracker/widgets/qualifying_item.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
 import 'package:intl/intl.dart';
 import 'package:swipedetector/swipedetector.dart';
@@ -52,66 +51,61 @@ class _RacePageState extends State<RacePage> {
       2: Text("Results")
     };
 
-    return SwipeDetector(
-      onSwipeDown: () {
-        Navigator.of(context).pop();
-      },
-      child: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: CupertinoColors.lightBackgroundGray,
-          leading: GestureDetector(
-            child: Icon(
-              CupertinoIcons.clear_thick_circled,
-              size: 25.0,
-            ),
-            onTap: () => Navigator.of(context).pop(),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        backgroundColor: CupertinoColors.lightBackgroundGray,
+        leading: GestureDetector(
+          child: Icon(
+            CupertinoIcons.clear_circled,
+            size: 25.0,
           ),
-          middle: Text(
-            widget.race.raceName,
-          ),
+          onTap: () => Navigator.of(context).pop(),
         ),
-        child: Container(
-          color: CupertinoColors.white,
-          child: SafeArea(
-            bottom: false,
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 20.0),
-                SizedBox(
-                  width: 500.0,
-                  child: CupertinoSegmentedControl<int>(
-                    children: segmentWidgets,
-                    groupValue: currentSegment,
-                    onValueChanged: (int val) {
-                      setState(() {
-                        currentSegment = val;
-                      });
+        middle: Text(
+          widget.race.raceName,
+        ),
+      ),
+      child: Container(
+        color: CupertinoColors.white,
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 20.0),
+              SizedBox(
+                width: 500.0,
+                child: CupertinoSegmentedControl<int>(
+                  children: segmentWidgets,
+                  groupValue: currentSegment,
+                  onValueChanged: (int val) {
+                    setState(() {
+                      currentSegment = val;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Expanded(
+                child: SwipeDetector(
+                    onSwipeLeft: () {
+                      if (currentSegment < 2) {
+                        setState(() {
+                          currentSegment++;
+                        });
+                      }
                     },
-                  ),
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Expanded(
-                  child: SwipeDetector(
-                      onSwipeLeft: () {
-                        if (currentSegment < 2) {
-                          setState(() {
-                            currentSegment++;
-                          });
-                        }
-                      },
-                      onSwipeRight: () {
-                        if (currentSegment > 0){
-                          setState(() {
-                            currentSegment--;
-                          });
-                        }
-                      },
-                      child: page[currentSegment]),
-                )
-              ],
-            ),
+                    onSwipeRight: () {
+                      if (currentSegment > 0){
+                        setState(() {
+                          currentSegment--;
+                        });
+                      }
+                    },
+                    child: page[currentSegment]),
+              )
+            ],
           ),
         ),
       ),
@@ -175,7 +169,10 @@ class _RacePageState extends State<RacePage> {
         }
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.data == null) {
-          return new SizedBox.shrink();
+          return new Center(
+            child: const Text("No results to show",
+                style: TextStyle(fontWeight: FontWeight.w100)),
+          );
         }
         return new Center(
           child: CupertinoActivityIndicator(),
@@ -192,24 +189,13 @@ class _RacePageState extends State<RacePage> {
           return QualifyingGrid(
             qualifying: snapshot.data,
           );
-//          return Padding(
-//            padding: const EdgeInsets.all(4.0),
-//            child: new CupertinoScrollbar(
-//              child: Padding(
-//                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-//                child: ListView(
-//                  children: <Widget>[
-//                    for (QualifyingResult qualify in snapshot.data)
-//                      QualifyingItem(qualifyingResult: qualify),
-//                  ],
-//                ),
-//              ),
-//            ),
-//          );
         }
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.data == null) {
-          return new SizedBox.shrink();
+          return new Center(
+            child: const Text("No qualifications to show",
+            style: TextStyle(fontWeight: FontWeight.w100),),
+          );
         }
         return new Center(
           child: CupertinoActivityIndicator(),

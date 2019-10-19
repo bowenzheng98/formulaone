@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
       child: CupertinoApp(
         title: "formula one tracker",
         theme: CupertinoThemeData(
-          primaryColor: Styles.grey,
           textTheme: CupertinoTextThemeData(
-            primaryColor: Styles.grey,
             textStyle: TextStyle(
                 fontFamily: 'SFDisplayPro', color: Colors.black,
             ),
