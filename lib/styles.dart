@@ -10,4 +10,7 @@ class Styles{
   static const Color accent_orange = Color.fromRGBO(255, 149, 0, accent_opacity);
 
   static const double accent_opacity =  0.3;
+
+  static const TextStyle extra_light_text = TextStyle(fontWeight: FontWeight.w100);
+
 }

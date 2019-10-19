@@ -24,7 +24,6 @@ class _ScheduleItemState extends State<ScheduleItem> with TickerProviderStateMix
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
@@ -40,14 +39,13 @@ class _ScheduleItemState extends State<ScheduleItem> with TickerProviderStateMix
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 2.0, 16.0),
+          padding: const EdgeInsets.all(16.0  ),
           child: Row(
             children: <Widget>[
               Text(widget.race.raceName),
               Spacer(),
               Text("Round " +  widget.race.round.toString()),
               SizedBox(width: 5.0,),
-              Icon(CupertinoIcons.forward),
             ],
           ),
         ),

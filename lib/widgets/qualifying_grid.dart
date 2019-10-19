@@ -33,7 +33,7 @@ class _QualifyingGridState extends State<QualifyingGrid> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
       child: Row(
         children: <Widget>[
           Expanded(
