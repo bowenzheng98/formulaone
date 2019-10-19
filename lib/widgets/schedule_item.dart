@@ -38,7 +38,7 @@ class _ScheduleItemState extends State<ScheduleItem> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.all(4.0),
       child: PressableCard(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         upElevation: 2,

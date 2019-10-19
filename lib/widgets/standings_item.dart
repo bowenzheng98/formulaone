@@ -42,7 +42,7 @@ class StandingsItem extends StatelessWidget {
           ),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 16.0, 8.0),
             child: Text(points.toString()),
           )
         ],
