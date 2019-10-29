@@ -6,6 +6,7 @@ import 'package:fonetracker/services/driver_service.dart';
 import 'package:fonetracker/inject/injector.dart';
 import 'package:fonetracker/styles.dart';
 import 'package:fonetracker/utils/router.dart';
+import 'package:fonetracker/widgets/custom_nav_bar.dart';
 import 'package:fonetracker/widgets/homepage_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,11 +45,13 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
                     child: CustomScrollView(
                         slivers: <Widget>[
-                          CupertinoSliverNavigationBar(
+                          CustomCupertinoSliverNavigationBar(
                             largeTitle: Text("Formula Home"),
                             backgroundColor: Colors.white,
                             border: Border(
                                 bottom: BorderSide(style: BorderStyle.none)),
+                            alwaysShowMiddle: false,
+                            middle: Text("test"),
                           ),
                           SliverList(
                               delegate: SliverChildListDelegate([
