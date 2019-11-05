@@ -16,6 +16,7 @@ class LatestResultsService{
         .map((data) => RaceResult.fromJson(data)).toList();
     LatestResult latestResult = new LatestResult();
     latestResult.round  = int.parse(json["MRData"]["RaceTable"]["round"]);
+    latestResult.race = json["MRData"]["RaceTable"]["Races"][0]["raceName"];
     latestResult.results = results;
     return latestResult;
   }

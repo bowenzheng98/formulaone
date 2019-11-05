@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
                             border: Border(
                                 bottom: BorderSide(style: BorderStyle.none)),
                             alwaysShowMiddle: false,
-                            middle: Text("test"),
                           ),
                           SliverList(
                               delegate: SliverChildListDelegate([

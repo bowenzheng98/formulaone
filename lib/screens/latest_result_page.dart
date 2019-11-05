@@ -51,7 +51,7 @@ class _LatestResultPageState extends State<LatestResultPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),
                         child: Text(
-                          "Round " + snapshot.data.round.toString(),
+                          snapshot.data.race,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 18.0,

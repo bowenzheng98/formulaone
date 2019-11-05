@@ -11,6 +11,7 @@ import 'package:fonetracker/services/race_results_service.dart';
 import 'package:fonetracker/widgets/qualifying_grid.dart';
 import 'package:fonetracker/widgets/race_result_item.dart';
 import 'package:intl/intl.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:swipedetector/swipedetector.dart';
 
 class RacePage extends StatefulWidget {
@@ -88,22 +89,7 @@ class _RacePageState extends State<RacePage> {
                 height: 8.0,
               ),
               Expanded(
-                child: SwipeDetector(
-                    onSwipeLeft: () {
-                      if (currentSegment < 2) {
-                        setState(() {
-                          currentSegment++;
-                        });
-                      }
-                    },
-                    onSwipeRight: () {
-                      if (currentSegment > 0){
-                        setState(() {
-                          currentSegment--;
-                        });
-                      }
-                    },
-                    child: page[currentSegment]),
+                child: page[currentSegment],
               )
             ],
           ),
@@ -138,10 +124,23 @@ class _RacePageState extends State<RacePage> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Image.asset("assets/circuits/" + race.ciruit.circuitId + ".png"),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: 4.0,
+            horizontal: 4.0,
+          ),
+          height: 250.0,
+          child: ClipRect(
+            child: PhotoView(
+              backgroundDecoration: BoxDecoration(
+                color: CupertinoColors.white
+              ),
+              imageProvider: AssetImage("assets/circuits/" + race.ciruit.circuitId + ".png"),
+              maxScale: PhotoViewComputedScale.covered * 2.0,
+              minScale: PhotoViewComputedScale.contained,
+              initialScale: PhotoViewComputedScale.contained,
+            ),
+          ),
         )
       ],
     );
